@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+[['Jon Snow', 26299532, 'jsnow@gmail.com'],['Daniel Caesar', 25644521, 'dcaesar@hotmail.com'], ['Gordon Ramsay', 20194827, 'lambsauce@gmail.com']].each do |name, sid, email|
+  Student.create(
+    name: name,
+    student_id: sid,
+    email: email
+  )
+end
+#looks like both default and student_id are the same
+
+[['Jhene Aiko', 'jaiko@berkeley.edu'],['Frank Ocean', 'focean@berkeley.edu'], ['Donald Glover', 'childishgambino@berkeley.edu']].each do |name, email|
+  Teacher.create(
+    name: name,
+    email: email
+  )
+end
+
+#how to create course?
