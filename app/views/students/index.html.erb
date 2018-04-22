@@ -13,8 +13,8 @@
     <% @students.each do |student| %>
    
       <tr>
-         <p><%= student.name %></p>
-    <p><%= student.email %></p>
+        <td><%= student.name %></td>
+        
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,3 +26,4 @@
 <br>
 
 <%= link_to 'New Student', new_student_path %>
+<%= link_to 'Home', home_index_path %>

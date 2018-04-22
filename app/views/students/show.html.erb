@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<p><%= @student.name %> </p>
+<p><%= @student.email %></p>
+<%= @student.courses.each do |course|%>
+<p><%= course.name %></p>
+<% end %> 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>
