@@ -14,7 +14,7 @@
       <% @courses.each do |course| %>
         <% if course.teacher_id == current_teacher.id %>
           <tr>
-            <%= course.name %>
+            <%= link_to course.name, "/courses/#{course.id}" %>
           </tr>
         <% end %>
       <% end %>
