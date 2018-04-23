@@ -11,12 +11,10 @@
 <div class="column">
   <table class="table">
     <tbody>
-      <% @courses.each do |course| %>
-        <% if course.teacher_id == current_teacher.id %>
-          <tr>
-            <%= link_to course.name, "/courses/#{course.id}" %>
-          </tr>
-        <% end %>
+      <% @my_courses.each do |course| %>
+        <tr>
+          <%= link_to course.name, "/courses/#{course.id}" %>
+        </tr>
       <% end %>
     </tbody>
   </table>
