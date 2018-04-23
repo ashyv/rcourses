@@ -3,7 +3,26 @@
 <%= form_tag("/courses", method: "create") do %>
   <%= label_tag(:name, "Course Name: ") %>
   <%= text_field_tag(:name) %>
+  <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
   <%= submit_tag("Create Course") %>
 <% end %>
+
+<h2> Courses Taught by Teacher </h2>
+<div class="column">
+  <table class="table">
+    <tbody>
+      <% @courses.each do |course| %>
+        <% if course.teacher_id == current_teacher.id %>
+          <tr>
+            <%= course.name %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+<br>
 
 <%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
