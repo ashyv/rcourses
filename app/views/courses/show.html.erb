@@ -1,4 +1,22 @@
-<p id="notice"><%= notice %></p>
+<h1> <%= @course.name %> </h1>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= form_tag("/assigment", method: "create") do %>
+  <%= label_tag(:name, "Assignment Name: ") %>
+  <%= text_field_tag(:name) %>
+  <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
+  <%= hidden_field_tag(:course_id, @course.id) %>
+  <%= submit_tag("Create Assignment") %>
+<% end %>
+
+<h2> Courses Taught by Teacher </h2>
+<div class="column">
+  <table class="table">
+    <tbody>
+      <% @my_courses.each do |course| %>
+        <tr>
+          <%= link_to course.name, "/courses/#{course.id}" %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
