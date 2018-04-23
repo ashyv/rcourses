@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   devise_for :students
   devise_for :teachers
 
-  # resources :students
-  get '/students', to: "students#show", as: 'student'
+  resources :students
   resources :teachers
   resources :courses
   authenticated :teacher do

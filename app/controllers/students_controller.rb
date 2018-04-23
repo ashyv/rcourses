@@ -1,10 +1,10 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action only: [:show, :edit, :update, :destroy]
 
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @student = Student.where(cal_id: params["cal_id"])
   end
 
   # GET /students/1
@@ -25,7 +25,8 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params)
+    @student = Student.new()
+    @student.cal_id = params["cal_id"]
 
     respond_to do |format|
       if @student.save
