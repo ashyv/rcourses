@@ -11,6 +11,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    @assignments = Assignment.where("#{:course_id} = ? AND #{:student_id} = ?", params[:id], 1)
   end
 
   # GET /courses/new
