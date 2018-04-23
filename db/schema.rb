@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420025621) do
+ActiveRecord::Schema.define(version: 20180423092226) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "name"
@@ -44,20 +44,11 @@ ActiveRecord::Schema.define(version: 20180420025621) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.integer "cal_id"
     t.string "name"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.index ["email"], name: "index_students_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+    t.integer "cal_id"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teachers", force: :cascade do |t|
