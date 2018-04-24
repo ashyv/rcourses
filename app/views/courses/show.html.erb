@@ -20,3 +20,12 @@
     </tbody>
   </table>
 </div>
+
+<h2> Add Student to Course </h2> 
+<!-- Need to route to proper place so that we can add entry to students_courses table -->
+<%= form_tag("/assignments", method: "create") do %>
+  <%= label_tag(:student_id, "Cal student ID: ") %>
+  <%= number_field_tag(:student_id) %>
+  <%= hidden_field_tag(:course_id, @course.id) %>
+  <%= submit_tag("Add Student to Course") %>
+<% end %>
