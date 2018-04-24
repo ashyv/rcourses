@@ -1,22 +1,43 @@
 <h1> <%= @course.name %> </h1>
 
-<%= form_tag("/assigment", method: "create") do %>
+<%= form_tag("/assignments", method: "create") do %>
   <%= label_tag(:name, "Assignment Name: ") %>
   <%= text_field_tag(:name) %>
+  <%= label_tag(:points, "Total Points: ") %>
+  <%= number_field_tag(:points) %>
+  <%= label_tag(:due_date, "Due Date: ") %>
+  <%= text_field_tag(:due_date) %>
   <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
   <%= hidden_field_tag(:course_id, @course.id) %>
   <%= submit_tag("Create Assignment") %>
 <% end %>
 
-<h2> Courses Taught by Teacher </h2>
+<h2> Assignments for Course </h2>
 <div class="column">
   <table class="table">
     <tbody>
-      <% @my_courses.each do |course| %>
+      <% @assignments.each do |assignment| %>
         <tr>
-          <%= link_to course.name, "/courses/#{course.id}" %>
+          <td>
+          <%= link_to assignment.name, "/assignments/#{assignment.id}" %>
+          </td>
+          <td>
+          	<%= "-- / #{assignment.points}" %>
+          </td>
+          <td>
+          	<%= "#{assignment.due_date}" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<h2> Add Student to Course </h2> 
+<!-- Need to route to proper place so that we can add entry to students_courses table -->
+<%= form_tag("/assignments", method: "create") do %>
+  <%= label_tag(:student_id, "Cal student ID: ") %>
+  <%= number_field_tag(:student_id) %>
+  <%= hidden_field_tag(:course_id, @course.id) %>
+  <%= submit_tag("Add Student to Course") %>
+<% end %>

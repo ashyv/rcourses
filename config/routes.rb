@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :students
   resources :teachers
   resources :courses
+  resources :assignments
   authenticated :teacher do
     root to: 'teachers#index', as: :authenticated_root
   end
