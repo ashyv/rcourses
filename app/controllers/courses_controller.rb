@@ -13,7 +13,8 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @student_courses = StudentCourse.all
     @students = Student.all
-    @assignments = Assignment.where("#{:course_id} = ? AND #{:student_id} = ?", params[:id], 1)
+    # @assignments = Assignment.all
+    @assignments = Assignment.where(course_id: @course.id)
   end
 
   # GET /courses/new

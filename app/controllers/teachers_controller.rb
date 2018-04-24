@@ -19,7 +19,7 @@ class TeachersController < ApplicationController
     if current_teacher
       @teacher = current_teacher
     else
-      @teacher = Teacher.find(params[:id])
+      @teacher = Teacher.find(params[teacher_id])
     end
     @courses = Course.all
     # @my_courses = Course.where(teacher_id: current_teacher.id)
