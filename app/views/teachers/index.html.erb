@@ -1,24 +1,29 @@
-<h1> teacher! </h1>
-
-<%= form_tag("/courses", method: "create") do %>
-  <%= label_tag(:name, "Course Name: ") %>
-  <%= text_field_tag(:name) %>
-  <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
-  <%= submit_tag("Create Course") %>
+<h1> TEACHERS! </h1>
+<% if current_teacher %>
+  <%= form_tag("/courses", method: "create") do %>
+   <%= label_tag(:name, "Course Name: ") %>
+    <%= text_field_tag(:name) %>
+    <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
+    <%= submit_tag("Create Course") %>
+  <% end %>
 <% end %>
 
-<h2> Courses Taught by Teacher </h2>
+<%= @teachers.each do |teacher| %>
+<h2> Courses Taught by <%= teacher.name %> </h2>
 <div class="column">
   <table class="table">
     <tbody>
-      <% @my_courses.each do |course| %>
+      <% @courses.each do |course| %>
         <tr>
+          <% if course.teacher_id == teacher.id %>
           <%= link_to course.name, "/courses/#{course.id}" %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+<% end %> 
 
 <br>
 <br>

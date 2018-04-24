@@ -2,14 +2,14 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  devise_for :teachers
+  devise_for :teachers, :controllers => {registrations: 'registrations'}
 
   resources :students
   resources :teachers
   resources :courses
   resources :assignments
   authenticated :teacher do
-    root to: 'teachers#index', as: :authenticated_root
+    root to: 'teachers#show', as: :authenticated_root
   end
 
   root to: "home#index"

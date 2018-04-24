@@ -1,1 +1,30 @@
-<h1> Hello teacher! </h1>
+<h1> <%= @teacher.name %>'s page! </h1>
+<% if current_teacher.id == @teacher.id %>	
+	<%= form_tag("/courses", method: "create") do %>
+  	<%= label_tag(:name, "Course Name: ") %>
+  	<%= text_field_tag(:name) %>
+  	<%= hidden_field_tag(:teacher_id, current_teacher.id) %>
+  	<%= submit_tag("Create Course") %>
+	<% end %>
+<% end %>
+<h2> Courses Taught by <% @teacher.name %> </h2>
+<div class="column">
+<div class="column">
+  <table class="table">
+    <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <% if course.teacher_id == @teacher.id %>
+          <%= link_to course.name, "/courses/#{course.id}" %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+<br>
+
+<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
+<%= link_to 'Home', home_index_path %>

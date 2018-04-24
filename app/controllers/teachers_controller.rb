@@ -5,13 +5,24 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     @teachers = Teacher.all
-    @my_courses = Course.where(teacher_id: current_teacher.id)
+    @courses = Course.all
+    # if current_teacher
+    #   @my_courses = Course.where(teacher_id: current_teacher.id)
+    # else
 
   end
 
   # GET /teachers/1
   # GET /teachers/1.json
   def show
+    # @teachers = Teacher.all
+    if current_teacher
+      @teacher = current_teacher
+    else
+      @teacher = Teacher.find(params[:id])
+    end
+    @courses = Course.all
+    # @my_courses = Course.where(teacher_id: current_teacher.id)
   end
 
   # GET /teachers/new
@@ -66,7 +77,7 @@ class TeachersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
-      @teacher = Teacher.find(params[:id])
+      @teacher = Teacher.find(current_teacher.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
