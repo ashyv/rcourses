@@ -7,7 +7,7 @@
   <%= number_field_tag(:points) %>
   <%= label_tag(:due_date, "Due Date: ") %>
   <%= text_field_tag(:due_date) %>
-  <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
+  <%= hidden_field_tag(:teacher_id, Teacher.find(@course.id).id) %>
   <%= hidden_field_tag(:course_id, @course.id) %>
   <%= submit_tag("Create Assignment") %>
 <% end %>
