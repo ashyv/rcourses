@@ -58,68 +58,68 @@ end
 
 
 
-[1...5].each do |sid|
+(1..5).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 1
   )
 end
-[6...10].each do |sid|
+(6..10).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 2
   )
 end
-[11...15].each do |sid|
+(11..15).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 3
   )
 end
 
-[16...20].each do |sid|
+(16..20).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 4
   )
 end
 
-[21...25].each do |sid|
+(21..25).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 5
   )
 end
 
-[26...30].each do |sid|
+(26..30).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 6
   )
 end
 
-[31...35].each do |sid|
+(31..35).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 7
   )
 end
 
-[36...40].each do |sid|
+(36..40).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 8
   )
 end
 
-[41...45].each do |sid|
+(41..45).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 9
   )
 end
 
-[46...50].each do |sid|
+(46..50).each do |sid|
   StudentCourse.create!(
   student_id: sid,
   course_id: 10
