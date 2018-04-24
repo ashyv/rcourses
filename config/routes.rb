@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :courses
   resources :assignments
   authenticated :teacher do
-    root to: 'teachers#show', as: :authenticated_root
+    root to: 'teachers#show'
+  end
+  authenticated :student do
+    root to: 'student#show', as: :authenticated_root
   end
   resources :student_courses
   post 'student_course', to: 'student_courses#add_to_course'

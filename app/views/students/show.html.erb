@@ -1,7 +1,7 @@
 <%-#<% if current_student %>
 
-<h1> Hello <%= @student.name %> ! </h1>
-<h2> Your cal id is: <%= @student.cal_id %> </h2>
+<h1> <%= @student.name %>'s dashboard ! </h1>
+<!-- <h2> Your cal id is: <%= @student.cal_id %> </h2> -->
 
 <%-#<% end %>
 
@@ -23,5 +23,5 @@
   </tbody>
 </table>
 <br>
-
+<%-#<%= link_to 'Log Out', destroy_student_session_path, :method=>'delete' %>
 <%= link_to 'Home', home_index_path %>

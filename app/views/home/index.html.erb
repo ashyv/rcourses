@@ -3,10 +3,15 @@
 <p><%= link_to 'Teachers:', teachers_path %> <%= Teacher.count %> registered</p>
 <p><%= link_to 'Courses:', courses_path %> <%= Course.count %> registered</p>
 <p><%= link_to 'Students:', students_path %> <%= Student.count %> registered</p>
+<% if !current_teacher %>
 <%= link_to 'Teacher Log In', new_teacher_session_path %>
-
 <%= form_tag("/students", method: "get") do %>
   <%= label_tag(:cal_id, "Student ID: ") %>
   <%= number_field_tag(:cal_id) %>
   <%= submit_tag("Student Login") %>
+<% end %>
+<% end %>
+<% if current_teacher %>
+<p> <%= current_teacher.name %> is signed in! </p>
+	<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
 <% end %>
