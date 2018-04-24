@@ -4,12 +4,12 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @student = Student.where(cal_id: params["cal_id"]).first_or_create()
+    @students = Student.all
   end
-
   # GET /students/1
   # GET /students/1.json
   def show
+    @student = Student.find(params[:id])
   end
 
   # GET /students/new
@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
   end
-  
+
   def add_to_course
     @student = Student.find_by(cal_id: params[:student_id])
     @course = Course.find(params[:course_id])
