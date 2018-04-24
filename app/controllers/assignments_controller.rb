@@ -32,6 +32,8 @@ class AssignmentsController < ApplicationController
     @assignment.name = params[:name]
     @assignment.teacher_id = params[:teacher_id]
     @assignment.course_id = params[:course_id]
+    @assignment.points = params[:points]
+    @assignment.due_date = params[:due_date]
     @assignment.student_id = 1
     #placeholder assignment in case there are no students in class
     

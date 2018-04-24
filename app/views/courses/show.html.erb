@@ -3,6 +3,10 @@
 <%= form_tag("/assignments", method: "create") do %>
   <%= label_tag(:name, "Assignment Name: ") %>
   <%= text_field_tag(:name) %>
+  <%= label_tag(:points, "Total Points: ") %>
+  <%= number_field_tag(:points) %>
+  <%= label_tag(:due_date, "Due Date: ") %>
+  <%= text_field_tag(:due_date) %>
   <%= hidden_field_tag(:teacher_id, current_teacher.id) %>
   <%= hidden_field_tag(:course_id, @course.id) %>
   <%= submit_tag("Create Assignment") %>
@@ -14,7 +18,15 @@
     <tbody>
       <% @assignments.each do |assignment| %>
         <tr>
+          <td>
           <%= link_to assignment.name, "/assignments/#{assignment.id}" %>
+          </td>
+          <td>
+          	<%= "-- / #{assignment.points}" %>
+          </td>
+          <td>
+          	<%= "#{assignment.due_date}" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
