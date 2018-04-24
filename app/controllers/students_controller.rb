@@ -21,6 +21,13 @@ class StudentsController < ApplicationController
   def edit
   end
 
+  def add_to_course
+    @student = Student.find(params[:student_id])
+    @course = Course.find(params[:course_id])
+    StudentCourse.create()
+    redirect_to course_path
+  end
+
   # POST /students
   # POST /students.json
   def create
