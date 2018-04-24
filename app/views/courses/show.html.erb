@@ -49,13 +49,12 @@
 <div class="column">
   <table class="table">
     <tbody>
-      <% @student_courses.each do |scourse| %> 
-        <tr>
-          <% if scourse.course_id == @course.id%>
+      <% @course.students.each do |student| %> 
+       
           <td>
-            <%= link_to Student.find(scourse.student_id).name, student_path(scourse.student_id) %>
+            <%= link_to student.name, student_path(student) %>
           </td>
-         <% end %>
+   
         </tr>
       <% end %> 
     </tbody>

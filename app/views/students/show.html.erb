@@ -14,13 +14,13 @@
 
   <tbody>
   	<h3> <%= @student.name %>'s courses </h3>
-    <% @student_courses.each do |scourse| %>
-    	<% if scourse.student_id == @student.id %> 
+    <% @student.courses.each do |course| %>
+    	
       <tr>
-        <td><%= Course.find(scourse.course_id).name %></td>
-        <td><%= link_to 'Show', course_path(scourse.course_id) %></td>
+        <td><%= course.name %></td>
+        <td><%= link_to 'Show', course_path(course) %></td>
       </tr>
-      <% end %>
+    
     <% end %>
   </tbody>
 </table>
