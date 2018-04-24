@@ -24,35 +24,37 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    # @course = Course.where(id: params["course_id"])
-    # @students = @course.students
-
-    @assignment = Assignment.new()
+    @course = Course.find(params[:course_id])
+    @students = @course.students
+    if @students
+      @students.each do |student|
+      assignment = Assignment.new()
+      assignment.name = params[:name]
+      assignment.teacher_id = params[:teacher_id]
+      assignment.course_id = params[:course_id]
+      assignment.cal_id = student.cal_id
+      assignment.save
+    else
+      @assignment = Assignment.new()
+      @assignment.name = params[:name]
+      @assignment.teacher_id = params[:teacher_id]
+      @assignment.course_id = params[:course_id]
+      @assignment.points = params[:points]
+      @assignment.due_date = params[:due_date]
+      @assignment.student_id = 0
+    end
     
-    @assignment.name = params[:name]
-    @assignment.teacher_id = params[:teacher_id]
-    @assignment.course_id = params[:course_id]
-    @assignment.points = params[:points]
-    @assignment.due_date = params[:due_date]
-    @assignment.student_id = 1
     #placeholder assignment in case there are no students in class
     
 
-    # @students.each do |student|
-    #   assignment = Assignment.new()
-    #   assignment.name = params[:name]
-    #   assignment.teacher_id = params[:teacher_id]
-    #   assignment.course_id = params[:course_id]
-    #   assignment.cal_id = student.cal_id
-    #   assignment.save
-
-    # end
+    
     respond_to do |format|
       if @assignment.save
         format.html { redirect_to "/courses/#{params['course_id']}", notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       end
     end
+    redirect_to course_path()
   end
 
   # PATCH/PUT /assignments/1

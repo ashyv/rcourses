@@ -1,5 +1,5 @@
 <h1> <%= @course.name %> </h1>
-
+<% if current_teacher && current_teacher.id == @course.teacher_id %> 
 <%= form_tag("/assignments", method: "create") do %>
   <%= label_tag(:name, "Assignment Name: ") %>
   <%= text_field_tag(:name) %>
@@ -11,7 +11,7 @@
   <%= hidden_field_tag(:course_id, @course.id) %>
   <%= submit_tag("Create Assignment") %>
 <% end %>
-
+<% end %>
 <h2> Assignments for Course </h2>
 <div class="column">
   <table class="table">
