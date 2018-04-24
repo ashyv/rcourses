@@ -20,13 +20,14 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
   end
-
+  
   def add_to_course
-    @student = Student.find(params[:student_id])
+    @student = Student.find_by(cal_id: params[:student_id])
     @course = Course.find(params[:course_id])
-    StudentCourse.create()
+    StudentCourse.create(@student, @course)
     redirect_to course_path
   end
+
 
   # POST /students
   # POST /students.json

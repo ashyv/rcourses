@@ -36,7 +36,7 @@
 <% if current_teacher && current_teacher.id == @course.teacher_id %> 
 <h2> Add Student to Course </h2> 
 <!-- Need to route to proper place so that we can add entry to students_courses table -->
-<%= form_tag(student_path, method: :add_to_course) do %>
+<%= form_tag('/student_courses', method: 'post') do %>
   <%= label_tag(:student_id, "Cal student ID: ") %>
   <%= number_field_tag(:student_id) %>
   <%= hidden_field_tag(:course_id, @course.id) %>
@@ -49,14 +49,15 @@
 <div class="column">
   <table class="table">
     <tbody>
-      <!-- <% @assignments.each do |assignment| %> -->
+      <% @course.students.each do |student| %> 
         <tr>
           
           <td>
+            <%= student.name %>
           </td>
          
         </tr>
-      <!-- <% end %> -->
+      <% end %> 
     </tbody>
   </table>
 </div>
