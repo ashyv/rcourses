@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<h1> Assignment: <%= @assignment.name %> </h1>
+<p> Points:<%= @assignment.points %> </p>
+<p> Due:<%= @assignment.due_date %> </h1>
+	<br>
 <%= link_to 'Edit', edit_assignment_path(@assignment) %> |
 <%= link_to 'Back', assignments_path %>

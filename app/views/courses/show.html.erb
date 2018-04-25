@@ -17,7 +17,7 @@
   <table class="table">
     <tbody>
       <% @assignments.each do |assignment| %>
-     
+      <% if assignment.course_id == @course.id%>
         <tr>
           <td>
           <%= link_to assignment.name, assignment_path(assignment.id) %>
@@ -30,6 +30,7 @@
           </td>
         </tr>
     
+      <% end %>
       <% end %>
     </tbody>
   </table>
@@ -52,7 +53,7 @@
   <table class="table">
     <tbody>
       <% @course.students.each do |student| %> 
-       
+       <tr>
           <td>
             <%= link_to student.name, student_path(student) %>
           </td>

@@ -13,8 +13,8 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @student_courses = StudentCourse.all
     @students = Student.all
-    # @assignments = Assignment.all
-    @assignments = Assignment.where(course_id: @course.id)
+    @assignments = Assignment.group(:name)
+    # @assignments = Assignment.where.uniq_by(&:course_id)
   end
 
   # GET /courses/new
