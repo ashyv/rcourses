@@ -14,8 +14,8 @@
       font-family: "Chalkduster";
     }
 
-    h2 {
-      font-size: 4vw;
+    h3 {
+      font-size: 2.5vw;
       font-family: "Chalkduster";
     }
 
@@ -69,19 +69,6 @@
 </head>
 
 <h1> <%= @course.name %> Homepage </h1>
-<% if current_teacher && current_teacher.id == @course.teacher_id %> 
-<%= form_tag("/assignments", method: "create") do %>
-  <%= label_tag(:name, "Assignment Name: ") %>
-  <%= text_field_tag(:name) %>
-  <%= label_tag(:points, "Total Points: ") %>
-  <%= number_field_tag(:points) %>
-  <%= label_tag(:due_date, "Due Date: ") %>
-  <%= text_field_tag(:due_date) %>
-  <%= hidden_field_tag(:teacher_id, @course.teacher_id)%>
-  <%= hidden_field_tag(:course_id, @course.id) %>
-  <%= submit_tag("Create Assignment") %>
-<% end %>
-<% end %>
 <h3> Assignments for Course </h3>
 <div>
   <table>
@@ -119,14 +106,36 @@
 </div>
 
 <% if current_teacher && current_teacher.id == @course.teacher_id %> 
-<h2> Add Student to Course </h2> 
-<!-- Need to route to proper place so that we can add entry to students_courses table -->
-<%= form_tag('/student_courses', method: 'post') do %>
-  <%= label_tag(:student_id, "Cal student ID: ") %>
-  <%= number_field_tag(:student_id) %>
-  <%= hidden_field_tag(:course_id, @course.id) %>
-  <%= submit_tag("Add Student to Course") %>
+	<h3> Add Assignment </h3>
+	<%= form_tag("/assignments", method: "create") do %>
+	  <%= label_tag(:name, "Assignment Name: ") %>
+	  &nbsp;
+	  <%= text_field_tag(:name) %>
+	  &nbsp;
+	  <%= label_tag(:points, "Total Points: ") %>
+	  &nbsp;
+	  <%= number_field_tag(:points) %>
+	  &nbsp;
+	  <%= label_tag(:due_date, "Due Date: ") %>
+	  &nbsp;
+	  <%= text_field_tag(:due_date) %>
+	  <%= hidden_field_tag(:teacher_id, @course.teacher_id)%>
+	  <%= hidden_field_tag(:course_id, @course.id) %>
+	  &nbsp;
+	  <%= submit_tag("Create Assignment") %>
+	<% end %>
 <% end %>
+
+<% if current_teacher && current_teacher.id == @course.teacher_id %> 
+	<h3> Add Student to Course </h3> 
+	<%= form_tag('/student_courses', method: 'post') do %>
+	  <%= label_tag(:student_id, "Cal student ID: ") %>
+	  &nbsp;
+	  <%= number_field_tag(:student_id) %>
+	  &nbsp;
+	  <%= hidden_field_tag(:course_id, @course.id) %>
+	  <%= submit_tag("Add Student to Course") %>
+	<% end %>
 <% end %>
 
 <div id="footer">
