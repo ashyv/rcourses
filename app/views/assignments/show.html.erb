@@ -1,3 +1,57 @@
+<head> 
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/a7/fd/24/a7fd24c48e7b8d87cdfc691efc2ef876.jpg');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-attachment: fixed;
+      margin: 6vw;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 6vw;
+      font-family: "Chalkduster";
+    }
+
+    h2 {
+      font-size: 4vw;
+      font-family: "Chalkduster";
+    }
+
+    p {
+      font-size: 2vw;
+    }
+
+    /* unvisited link */
+    a:link {
+      color: white;
+    }
+
+    /* visited link */
+    a:visited {
+      color: white;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: blue;
+    }
+
+    /* selected link */
+    a:active {
+      color: blue;
+    }
+
+    #footer {
+      position: fixed;
+      bottom: 5vw;
+      font-size: 1.5vw;
+    }
+
+  </style>
+</head>
+
 <p id="notice"><%= notice %></p>
 <h1> Assignment: <%= @assignment.name %> </h1>
 <p> Points:<%= @assignment.points %> </p>
@@ -15,7 +69,7 @@
             <%= a.name %>
           </td>
           <td>
-            <%= a.score %>
+            <%= a.cal_id %>
           </td>
    
         </tr>

@@ -33,7 +33,7 @@ class AssignmentsController < ApplicationController
     if @students
       @students.each do |student|
         Assignment.create!({due_date: params[:due_date], points: params[:points], student_id: student.id, 
-          name: params[:name], teacher_id: params[:teacher_id], course_id: params[:course_id]})
+          name: params[:name], cal_id: student.cal_id, teacher_id: params[:teacher_id], course_id: params[:course_id]})
         # @assignment = Assignment.new()
         # @assignment.name = params[:name]
         # @assignment.teacher_id = params[:teacher_id]
@@ -48,7 +48,6 @@ class AssignmentsController < ApplicationController
       @assignment.course_id = params[:course_id]
       @assignment.points = params[:points]
       @assignment.due_date = params[:due_date]
-      @assignment.student_id = 0
       @assignment.save
     end
   
