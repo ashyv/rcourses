@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 20180426085540) do
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
 
+  create_table "courses_students", id: false, force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "student_id", null: false
+  end
+
   create_table "student_courses", force: :cascade do |t|
     t.integer "student_id"
     t.integer "course_id"
