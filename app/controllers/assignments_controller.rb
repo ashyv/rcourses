@@ -11,6 +11,9 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1.json
   def show
     @assignment = Assignment.find(params[:id])
+    @assignments = Assignment.where(course_id: @assignment.course_id).
+    where(teacher_id: @assignment.teacher_id).
+    where(name: @assignment.name)
   end
 
   # GET /assignments/new
@@ -30,7 +33,7 @@ class AssignmentsController < ApplicationController
     if @students
       @students.each do |student|
         Assignment.create!({due_date: params[:due_date], points: params[:points], student_id: student.id, 
-          name: params[:name], teacher_id: params[:teacher_id], course_id: params[:course_id]})
+          name: params[:name], cal_id: student.cal_id, teacher_id: params[:teacher_id], course_id: params[:course_id]})
         # @assignment = Assignment.new()
         # @assignment.name = params[:name]
         # @assignment.teacher_id = params[:teacher_id]
@@ -45,7 +48,6 @@ class AssignmentsController < ApplicationController
       @assignment.course_id = params[:course_id]
       @assignment.points = params[:points]
       @assignment.due_date = params[:due_date]
-      @assignment.student_id = 0
       @assignment.save
     end
   
@@ -67,9 +69,8 @@ class AssignmentsController < ApplicationController
   # PATCH/PUT /assignments/1.json
   def update
     respond_to do |format|
-      if @assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @assignment }
+      if @assignment.update(score: params["score"])
+        format.html { redirect_to @assignment }
       else
         format.html { render :edit }
         format.json { render json: @assignment.errors, status: :unprocessable_entity }

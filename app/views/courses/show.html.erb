@@ -1,29 +1,99 @@
-<h1> <%= @course.name %> </h1>
-<% if current_teacher && current_teacher.id == @course.teacher_id %> 
-<%= form_tag("/assignments", method: "create") do %>
-  <%= label_tag(:name, "Assignment Name: ") %>
-  <%= text_field_tag(:name) %>
-  <%= label_tag(:points, "Total Points: ") %>
-  <%= number_field_tag(:points) %>
-  <%= label_tag(:due_date, "Due Date: ") %>
-  <%= text_field_tag(:due_date) %>
-  <%= hidden_field_tag(:teacher_id, @course.teacher_id)%>
-  <%= hidden_field_tag(:course_id, @course.id) %>
-  <%= submit_tag("Create Assignment") %>
-<% end %>
-<% end %>
-<h2> Assignments for Course </h2>
-<div class="column">
-  <table class="table">
-    <tbody>
-      <% @assignments.each do |assignment| %>
+<head> 
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/a7/fd/24/a7fd24c48e7b8d87cdfc691efc2ef876.jpg');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-attachment: fixed;
+      margin: 6vw;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 6vw;
+      font-family: "Chalkduster";
+    }
+
+    h3 {
+      font-size: 2.5vw;
+      font-family: "Chalkduster";
+    }
+
+    p {
+      font-size: 2vw;
+    }
+
+    /* unvisited link */
+    a:link {
+      color: white;
+    }
+
+    /* visited link */
+    a:visited {
+      color: white;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: blue;
+    }
+
+    /* selected link */
+    a:active {
+      color: blue;
+    }
+
+    #footer {
+      position: fixed;
+      bottom: 5vw;
+      font-size: 1.5vw;
+    }
+
+    table {
+	    font-family: arial, sans-serif;
+	    border-collapse: collapse;
+	    width: 100%;
+		}
+
+		td, th {
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #3C9F54;
+		}
+
+  </style>
+</head>
+
+<h1> <%= @course.name %> Homepage </h1>
+<h3> Assignments for Course </h3>
+<div>
+  <table>
+  	<tr>
+	    <th>Assignment Name</th>
+	    <th>Score</th>
+	    <th>Due Date</th>
+  	</tr>
+    <% @assignments.each do |assignment| %>
       <% if assignment.course_id == @course.id%>
         <tr>
           <td>
-          <%= link_to assignment.name, assignment_path(assignment.id) %>
+          	<% if current_teacher && current_teacher.id == @course.teacher_id %>
+          		<%= link_to assignment.name, assignment_path(assignment.id) %>
+          	<% else %>
+          		<%= assignment.name %>
+          	<% end %>
+          	
           </td>
           <td>
-          	<%= assignment.points %>
+          	<% if assignment.score.nil? %>
+          		-- / <%= assignment.points %>
+          	<% else %>
+          		<%= assignment.score %> / <%= assignment.points %>
+          	<% end %>
           </td>
           <td>
           	<%= assignment.due_date %>
@@ -31,23 +101,45 @@
         </tr>
     
       <% end %>
-      <% end %>
-    </tbody>
+    <% end %>
   </table>
 </div>
 
 <% if current_teacher && current_teacher.id == @course.teacher_id %> 
-<h2> Add Student to Course </h2> 
-<!-- Need to route to proper place so that we can add entry to students_courses table -->
-<%= form_tag('/student_courses', method: 'post') do %>
-  <%= label_tag(:student_id, "Cal student ID: ") %>
-  <%= number_field_tag(:student_id) %>
-  <%= hidden_field_tag(:course_id, @course.id) %>
-  <%= submit_tag("Add Student to Course") %>
-<% end %>
+	<h3> Add Assignment </h3>
+	<%= form_tag("/assignments", method: "create") do %>
+	  <%= label_tag(:name, "Assignment Name: ") %>
+	  &nbsp;
+	  <%= text_field_tag(:name) %>
+	  &nbsp;
+	  <%= label_tag(:points, "Total Points: ") %>
+	  &nbsp;
+	  <%= number_field_tag(:points) %>
+	  &nbsp;
+	  <%= label_tag(:due_date, "Due Date: ") %>
+	  &nbsp;
+	  <%= text_field_tag(:due_date) %>
+	  <%= hidden_field_tag(:teacher_id, @course.teacher_id)%>
+	  <%= hidden_field_tag(:course_id, @course.id) %>
+	  &nbsp;
+	  <%= submit_tag("Create Assignment") %>
+	<% end %>
 <% end %>
 
+<% if current_teacher && current_teacher.id == @course.teacher_id %> 
+	<h3> Add Student to Course </h3> 
+	<%= form_tag('/student_courses', method: 'post') do %>
+	  <%= label_tag(:student_id, "Cal student ID: ") %>
+	  &nbsp;
+	  <%= number_field_tag(:student_id) %>
+	  &nbsp;
+	  <%= hidden_field_tag(:course_id, @course.id) %>
+	  <%= submit_tag("Add Student to Course") %>
+	<% end %>
+<% end %>
 
+<%
+=begin %>
 <h2> Students in Course </h2>
 <div class="column">
   <table class="table">
@@ -68,3 +160,13 @@
 <% end %> 
 
 <%= link_to 'Home', home_index_path %>
+<%
+=end %>
+
+<div id="footer">
+	<%= link_to 'Home', home_index_path %>
+	&nbsp;
+	<%= link_to 'Back', url_for(:back) %>
+	&nbsp;
+	<%= link_to 'Log Out', root_path, :method=>'get' %>
+</div>

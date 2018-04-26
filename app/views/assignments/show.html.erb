@@ -1,7 +1,108 @@
+<head> 
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/a7/fd/24/a7fd24c48e7b8d87cdfc691efc2ef876.jpg');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-attachment: fixed;
+      margin: 6vw;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 6vw;
+      font-family: "Chalkduster";
+    }
+
+    h2 {
+      font-size: 4vw;
+      font-family: "Chalkduster";
+    }
+
+    p {
+      font-size: 2vw;
+    }
+
+    /* unvisited link */
+    a:link {
+      color: white;
+    }
+
+    /* visited link */
+    a:visited {
+      color: white;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: blue;
+    }
+
+    /* selected link */
+    a:active {
+      color: blue;
+    }
+
+    #footer {
+      position: fixed;
+      bottom: 5vw;
+      font-size: 1.5vw;
+    }
+
+    table {
+	    font-family: arial, sans-serif;
+	    border-collapse: collapse;
+	    width: 100%;
+		}
+
+		td, th {
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #3C9F54;
+		}
+
+  </style>
+</head>
+
 <p id="notice"><%= notice %></p>
-<h1> Assignment: <%= @assignment.name %> </h1>
-<p> Points:<%= @assignment.points %> </p>
-<p> Due:<%= @assignment.due_date %> </h1>
+<h1> <%= @assignment.name %> </h1>
+<h2> Due: <%= @assignment.due_date %> </h2>
 	<br>
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
+
+<div class="column">
+  <table class="table">
+  	<tr>
+  		<th>Student Cal ID</th>
+	    <th>Score out of <%= @assignment.points %> </th>
+	    <th>Update Score</th>
+  	</tr>
+    <% @assignments.each do |a| %> 
+     <tr>
+        <td>
+ 					<%= a.cal_id %>
+        </td>
+        <td>
+          <%= a.score %>
+        </td>
+        <td>
+          <%= form_tag("/assignments/#{a.id}", method: "patch") do %>
+      			<%= number_field_tag(:score) %>
+      			<%= submit_tag("Update Score") %>
+    			<% end %>
+        </td>
+ 
+      </tr>
+    <% end %> 
+  </table>
+</div>
+
+<div id="footer">
+	<%= link_to 'Back', url_for(:back) %>
+	&nbsp;
+	<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
+</div>
+
