@@ -1,19 +1,77 @@
+<head> 
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/a7/fd/24/a7fd24c48e7b8d87cdfc691efc2ef876.jpg');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-attachment: fixed;
+      margin: 6vw;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 6vw;
+      font-family: "Chalkduster";
+    }
+
+    h2 {
+      font-size: 4vw;
+      font-family: "Chalkduster";
+    }
+
+    p {
+      font-size: 3vw;
+    }
+
+    /* unvisited link */
+    a:link {
+      color: white;
+    }
+
+    /* visited link */
+    a:visited {
+      color: white;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: blue;
+    }
+
+    /* selected link */
+    a:active {
+      color: blue;
+    }
+
+    #footer {
+      position: fixed;
+      bottom: 5vw;
+      font-size: 1.5vw;
+    }
+  </style>
+</head>
+
 <h1>Rcourses</h1>
 <h2>A better version of bcourses!</h2>
-<p><%= link_to 'Teachers:', teachers_path %> <%= Teacher.count %> registered</p>
-<p><%= link_to 'Courses:', courses_path %> <%= Course.count %> registered</p>
-<p><%= link_to 'Students:', students_path %> <%= Student.count %> registered</p>
-<%= link_to 'Submissions', submissions_index_path %>
-<% if !current_teacher %>
-<%= link_to 'Teacher Log In', new_teacher_session_path %>
 
-<%= form_tag("/students", method: "get") do %>
-  <%= number_field_tag(:cal_id) %>
-  <%= submit_tag("Student Login") %>
-<% end %>
-<% end %>
-<% if current_teacher %>
-<p> <%= current_teacher.name %> is signed in! </p>
-	<%= link_to 'My Page', teacher_path(current_teacher) %>
-	<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
+<% if !current_teacher %>
+	<p> Teachers </p>
+	<%= link_to 'Teacher Log In', new_teacher_session_path %>
+
+	<br>
+	<br>
+
+	<p> Students </p>
+	<%= form_tag("/students", method: "get") do %>
+		<%= label_tag(:cal_id, "Cal Student ID: ") %>
+		&nbsp;
+	  <%= number_field_tag(:cal_id) %>
+	  &nbsp;
+	  <%= submit_tag("Student Login") %>
+	<% end %>
+	<% end %>
+	<% if current_teacher %>
+	<p> <%= current_teacher.name %> is signed in! </p>
+		<%= link_to 'My Page', teacher_path(current_teacher) %>
+		<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
 <% end %>

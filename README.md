@@ -4,39 +4,49 @@ Title:​ RCourses
 
 Team Members:​ Ashwin Vaidyanathan, Kevin Deguzman
 
-Demo Link:​ railsdecal.com
+Demo Link:​ Stored locally right now
 
 Idea: ​A "better" version of bCourses. 
 
 ## Models and Description:
 
-+ Teacher
+Teacher
 
- + has name, email and 
- + Teachers have admin access
- + Teachers can create a new course
+ + Has name, email, avatar and other Devise login information 
+ + Teachers have admin access. We enforce this admin access by checking if current_teacher exists. 
+ + Teachers can create a new course, add students to a course, and create new assignments. Teachers can also download student submission and grade their assignments. 
 
-+ Student
- + has name, email and
+Student
+ + Has name, email, and cal_id. 
+ + Students can login with just their cal student id. 
+ + Students can add a course. Students can also see their assignments for a given course, and upload files for their respective assignments. 
+ 
+Course
+ + Has many students, one teacher, and a name.
 
-+ Assignment
- + has name, course id, teacher id, grade, points
+Assignment
+ + Has name, course_id, teacher_id, student_id, grade, points, and due_date. 
 
-+ Submission
- + upload assignment for Carrierwave gem
- + can submit any type of file
-
-+ Course
- + has many students, one teacher
+Submission
+ + Upload assignment for Carrierwave gem
+ + Can submit any type of file
+ + Contains an assignment_id field so that the submission can be linked to the appropriate assignment. 
 
 
 ## Features:
+Teachers
 + Teachers can log in
-+ Students can submit assignment (submission)
-+ Students can log in with Cal ID
 + Teachers can make assignments for a course
-+ Teachers and Students can see assignments for a course
 + Teachers can upload a profile picture
++ Teachers can add students to a course
++ Teachers can download student submissions
++ Teachers can grade student assignments 
+
+Students
++ Students can submit assignment (submission)
++ Students can log in with just Cal ID
++ Students can add a course 
++ Students can view their assignments and get their total grade
 
 
 ## Division of Labor:
