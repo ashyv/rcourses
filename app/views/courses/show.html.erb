@@ -109,6 +109,7 @@
       <% end %>
     <% end %>
     <% else %>
+      <% if @scores %>
       <% @scores.each do |assignment| %>
       <% if assignment.course_id == @course.id%>
         <tr>
@@ -140,10 +141,11 @@
       <% end %>
     <% end %>
     <% end %>
+    <% end %>
   </table>
   <br>
 <!--  -->
-  <% if !current_teacher %>
+  <% if !current_teacher && @scores %>
   <h3> Your average grade: <%= @scores.collect(&:score).sum.to_f/@scores.length if @scores.length > 0%></h3>
   <% end %>
 </div>
