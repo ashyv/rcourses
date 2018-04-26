@@ -27,6 +27,6 @@ class SubmissionsController < ApplicationController
 private
   def submission_params
     # params.require(:submission).permit(:name, :attachment)
-    params.fetch(:submission, {}).permit(:name, :attachment)
+    params.fetch(:submission, {}).permit(:name, :attachment, :assignment_id)
   end
 end

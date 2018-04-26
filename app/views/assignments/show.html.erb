@@ -79,6 +79,7 @@
   		<th>Student Cal ID</th>
 	    <th>Score out of <%= @assignment.points %> </th>
 	    <th>Update Score</th>
+      <th>Student Submission </th>
   	</tr>
     <% @assignments.each do |a| %> 
      <tr>
@@ -94,11 +95,29 @@
       			<%= submit_tag("Update Score") %>
     			<% end %>
         </td>
- 
+        
+         <!--  @submissions.where() -->
+
+          <td>
+            <% @submissions.each do |submission| %>
+              <% if submission.assignment_id == a.id %>
+                  <%= link_to "Download submission", submission.attachment_url %></td>
+        
+             
+              <% end %>
+            <% end %>
+
+
+            
+
+          
       </tr>
     <% end %> 
   </table>
 </div>
+
+<% 
+=begin %>
 
 <div id="footer">
   <%= link_to 'Home', home_index_path %>
@@ -107,3 +126,5 @@
 	<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
 </div>
 
+<%
+=end %>

@@ -14,6 +14,7 @@ class AssignmentsController < ApplicationController
     @assignments = Assignment.where(course_id: @assignment.course_id).
     where(teacher_id: @assignment.teacher_id).
     where(name: @assignment.name)
+    @submissions = Submission.all
   end
 
   # GET /assignments/new

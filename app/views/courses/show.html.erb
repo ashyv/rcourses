@@ -76,6 +76,12 @@
 	    <th>Assignment Name</th>
 	    <th>Score</th>
 	    <th>Due Date</th>
+      <% if !current_teacher %>
+
+           <th>Submit Assignment</th>
+
+      <% end %>
+ 
   	</tr>
     <% if current_teacher %>
       <% @assignments.each do |assignment| %>
@@ -135,7 +141,10 @@
           </td>
           <td>
             <%= assignment.due_date %>
+
           </td>
+
+          <td>  <%= link_to "New Submission", submissions_new_path({assignment_id: assignment.id, student_id: assignment.student_id}), class: "btn btn-primary" %> </td>
         </tr>
     
       <% end %>
@@ -145,8 +154,9 @@
   </table>
   <br>
 <!--  -->
-  <% if !current_teacher && @scores %>
+  <% if !current_teacher && @scores && @scores.all? {|i| i.is_a?(Integer) }%>
   <h3> Your average grade: <%= @scores.collect(&:score).sum.to_f/@scores.length if @scores.length > 0%></h3>
+  
   <% end %>
 </div>
 
