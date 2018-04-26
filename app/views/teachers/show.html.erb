@@ -1,30 +1,90 @@
-<h1> <%= @teacher.name %>'s page! </h1>
-<% if current_teacher.id == @teacher.id %>	
-	<%= form_tag("/courses", method: "create") do %>
-  	<%= label_tag(:name, "Course Name: ") %>
-  	<%= text_field_tag(:name) %>
-  	<%= hidden_field_tag(:teacher_id, current_teacher.id) %>
-  	<%= submit_tag("Create Course") %>
-	<% end %>
-<% end %>
-<h2> Courses Taught by <%= @teacher.name %> </h2>
-<div class="column">
-<div class="column">
-  <table class="table">
-    <tbody>
-      <% @courses.each do |course| %>
-        <tr>
-          <% if course.teacher_id == @teacher.id %>
-          <%= link_to course.name, "/courses/#{course.id}" %>
-          <% end %>
-        </tr>
+<head> 
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/a7/fd/24/a7fd24c48e7b8d87cdfc691efc2ef876.jpg');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-attachment: fixed;
+      margin: 6vw;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 6vw;
+      font-family: "Chalkduster";
+    }
+
+    h2 {
+      font-size: 4vw;
+      font-family: "Chalkduster";
+    }
+
+    p {
+      font-size: 2vw;
+    }
+
+    /* unvisited link */
+    a:link {
+      color: white;
+    }
+
+    /* visited link */
+    a:visited {
+      color: white;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: blue;
+    }
+
+    /* selected link */
+    a:active {
+      color: blue;
+    }
+
+    #footer {
+      position: fixed;
+      bottom: 5vw;
+      font-size: 1.5vw;
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1> Teacher Homepage </h1>
+  <% if current_teacher.id == @teacher.id %>	
+  	<%= form_tag("/courses", method: "create") do %>
+    	<%= label_tag(:name, "Course Name: ") %>
+      &nbsp;
+    	<%= text_field_tag(:name) %>
+      &nbsp;
+    	<%= hidden_field_tag(:teacher_id, current_teacher.id) %>
+    	<%= submit_tag("Create Course") %>
+  	<% end %>
+  <% end %>
+  <h2> My Courses </h2>
+  <div>
+
+    <% @courses.each do |course| %>
+
+      <% if course.teacher_id == @teacher.id %>
+      <p> <%= link_to course.name, "/courses/#{course.id}" %> </p>
       <% end %>
-    </tbody>
-  </table>
-</div>
 
-<br>
-<br>
+    <% end %>
 
-<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
-<%= link_to 'Home', home_index_path %>
+  </div>
+
+  <br>
+  <br>
+
+  <div id='footer'>
+    <%= link_to 'Home', home_index_path %>
+    &nbsp;&nbsp;
+    <%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
+  </div>  
+
+</body>
+
