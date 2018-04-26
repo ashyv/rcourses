@@ -21,6 +21,10 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'devise'
 
+gem 'carrierwave', '~> 1.0'
+
+gem "paperclip", "~> 6.0.0"
+
 gem 'simple_form'
 
 # Use CoffeeScript for .coffee assets and views

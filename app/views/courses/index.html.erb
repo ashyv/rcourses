@@ -11,6 +11,7 @@
 
   <tbody>
     <% @courses.each do |course| %>
+    
       <tr>
         <td><%= course.name %></td>
         <td><%= Teacher.find(course.teacher_id).name %></td>

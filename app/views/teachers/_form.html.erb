@@ -1,4 +1,4 @@
-<%= form_with(model: teacher, local: true) do |form| %>
+<%= form_with(model: teacher, local: true, multipart: true) do |form| %>
   <% if teacher.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

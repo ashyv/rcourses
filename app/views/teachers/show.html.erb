@@ -1,4 +1,13 @@
 <h1> <%= @teacher.name %>'s page! </h1>
+
+
+<% if @teacher.avatar.file? %>
+  <%= image_tag @teacher.avatar.url %>
+<!--   <%= image_tag @teacher.avatar.url(:medium) %>
+  <%= image_tag @teacher.avatar.url(:thumb) %> -->
+<% else %>
+  No attachment available!
+<% end %>
 <% if current_teacher.id == @teacher.id %>	
 	<%= form_tag("/courses", method: "create") do %>
   	<%= label_tag(:name, "Course Name: ") %>
@@ -26,5 +35,8 @@
 <br>
 <br>
 
-<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
+<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'
+delete' %>
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> 
 <%= link_to 'Home', home_index_path %>
+
