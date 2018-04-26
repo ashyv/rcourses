@@ -77,16 +77,17 @@
 	    <th>Score</th>
 	    <th>Due Date</th>
   	</tr>
-    <% @assignments.each do |assignment| %>
+    <% if current_teacher %>
+      <% @assignments.each do |assignment| %>
       <% if assignment.course_id == @course.id%>
         <tr>
           <td>
-          	<% if current_teacher && current_teacher.id == @course.teacher_id %>
-          		<%= link_to assignment.name, assignment_path(assignment.id) %>
-          	<% else %>
-          		<%= assignment.name %>
-          	<% end %>
-          	
+            <% if current_teacher && current_teacher.id == @course.teacher_id %>
+              <%= link_to assignment.name, assignment_path(assignment.id) %>
+            <% else %>
+              <%= assignment.name %>
+            <% end %>
+            
           </td>
           <td>
             <% if current_teacher && current_teacher.id == @course.teacher_id %>
@@ -98,16 +99,53 @@
                 <%= assignment.score %> / <%= assignment.points %>
               <% end %>
             <% end %>
-          	
+            
           </td>
           <td>
-          	<%= assignment.due_date %>
+            <%= assignment.due_date %>
           </td>
         </tr>
     
       <% end %>
     <% end %>
+    <% else %>
+      <% @scores.each do |assignment| %>
+      <% if assignment.course_id == @course.id%>
+        <tr>
+          <td>
+            <% if current_teacher && current_teacher.id == @course.teacher_id %>
+              <%= link_to assignment.name, assignment_path(assignment.id) %>
+            <% else %>
+              <%= assignment.name %>
+            <% end %>
+            
+          </td>
+          <td>
+            <% if current_teacher && current_teacher.id == @course.teacher_id %>
+              -- / <%= assignment.points %>
+            <% else %>
+              <% if assignment.score.nil? %>
+              -- / <%= assignment.points %>
+             <% else %>
+                <%= assignment.score %> / <%= assignment.points %>
+              <% end %>
+            <% end %>
+            
+          </td>
+          <td>
+            <%= assignment.due_date %>
+          </td>
+        </tr>
+    
+      <% end %>
+    <% end %>
+    <% end %>
   </table>
+  <br>
+<!--  -->
+  <% if !current_teacher %>
+  <h3> Your average grade: <%= @scores.collect(&:score).sum.to_f/@scores.length if @scores.length > 0%></h3>
+  <% end %>
 </div>
 
 <% if current_teacher && current_teacher.id == @course.teacher_id %> 

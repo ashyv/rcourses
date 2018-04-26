@@ -66,7 +66,12 @@
   <div>
 
     <% @student.courses.each do |course| %>
-      <p> <%= link_to course.name, "/courses/#{course.id}" %> </p>
+      <% if current_teacher %>
+      <p> <%= link_to course.name, course_path(id: course.id) %> </p>
+
+      <% else %>
+          <p> <%= link_to course.name, course_path(id: course.id, student_id: @student.id) %> </p>
+      <% end %>
     <% end %>
 
 

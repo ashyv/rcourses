@@ -13,6 +13,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @student_courses = StudentCourse.all
     @students = Student.all
+    if !current_teacher
+      @student = Student.find(params[:student_id])
+      @scores = Assignment.where({course_id: @course.id, student_id: params[:student_id]})
+    end
     @assignments = Assignment.group(:name)
     # @assignments = Assignment.where.uniq_by(&:course_id)
   end
