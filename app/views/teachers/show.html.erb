@@ -96,7 +96,7 @@
 <!--   <%= image_tag @teacher.avatar.url(:medium) %>
   <%= image_tag @teacher.avatar.url(:thumb) %> -->
 <% else %>
-  No attachment available!
+  No avatar.
 <% end %>
   <% if current_teacher.id == @teacher.id %>	
   	<%= form_tag("/courses", method: "create") do %>

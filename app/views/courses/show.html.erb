@@ -89,11 +89,16 @@
           	
           </td>
           <td>
-          	<% if assignment.score.nil? %>
-          		-- / <%= assignment.points %>
-          	<% else %>
-          		<%= assignment.score %> / <%= assignment.points %>
-          	<% end %>
+            <% if current_teacher && current_teacher.id == @course.teacher_id %>
+              -- / <%= assignment.points %>
+            <% else %>
+              <% if assignment.score.nil? %>
+              -- / <%= assignment.points %>
+             <% else %>
+                <%= assignment.score %> / <%= assignment.points %>
+              <% end %>
+            <% end %>
+          	
           </td>
           <td>
           	<%= assignment.due_date %>

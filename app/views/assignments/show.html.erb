@@ -101,6 +101,7 @@
 </div>
 
 <div id="footer">
+  <%= link_to 'Home', home_index_path %>
 	<%= link_to 'Back', url_for(:back) %>
 	&nbsp;
 	<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
