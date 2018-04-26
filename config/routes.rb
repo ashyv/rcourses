@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     root to: 'student#show', as: :authenticated_root
   end
   resources :student_courses
-  post 'student_course', to: 'student_courses#add_to_course'
+  post 'student_course', to: 'student_courses#create'
   root to: "home#index"
 
 end
