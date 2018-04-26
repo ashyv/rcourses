@@ -49,31 +49,60 @@
       font-size: 1.5vw;
     }
 
+    table {
+	    font-family: arial, sans-serif;
+	    border-collapse: collapse;
+	    width: 100%;
+		}
+
+		td, th {
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #3C9F54;
+		}
+
   </style>
 </head>
 
 <p id="notice"><%= notice %></p>
-<h1> Assignment: <%= @assignment.name %> </h1>
-<p> Points:<%= @assignment.points %> </p>
-<p> Due:<%= @assignment.due_date %> </h1>
+<h1> <%= @assignment.name %> </h1>
+<h2> Due: <%= @assignment.due_date %> </h2>
 	<br>
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
 
 <div class="column">
   <table class="table">
-    <tbody>
-      <% @assignments.each do |a| %> 
-       <tr>
-          <td>
-            <%= a.name %>
-          </td>
-          <td>
-            <%= a.cal_id %>
-          </td>
-   
-        </tr>
-      <% end %> 
-    </tbody>
+  	<tr>
+  		<th>Student Cal ID</th>
+	    <th>Score out of <%= @assignment.points %> </th>
+	    <th>Update Score</th>
+  	</tr>
+    <% @assignments.each do |a| %> 
+     <tr>
+        <td>
+ 					<%= a.cal_id %>
+        </td>
+        <td>
+          <%= a.score %>
+        </td>
+        <td>
+          <%= form_tag("/assignments/#{a.id}", method: "patch") do %>
+      			<%= number_field_tag(:score) %>
+      			<%= submit_tag("Update Score") %>
+    			<% end %>
+        </td>
+ 
+      </tr>
+    <% end %> 
   </table>
 </div>
+
+<div id="footer">
+	<%= link_to 'Back', url_for(:back) %>
+	&nbsp;
+	<%= link_to 'Log Out', destroy_teacher_session_path, :method=>'delete' %>
+</div>
+

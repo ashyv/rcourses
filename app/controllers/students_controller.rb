@@ -5,7 +5,11 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @student = Student.find_by(cal_id: params["cal_id"])
-    redirect_to student_path(@student.id)
+    if @student.nil?
+      redirect_to Student.create(cal_id: params["cal_id"])
+    else
+      redirect_to student_path(@student.id)
+    end
   end
   # GET /students/1
   # GET /students/1.json

@@ -69,9 +69,8 @@ class AssignmentsController < ApplicationController
   # PATCH/PUT /assignments/1.json
   def update
     respond_to do |format|
-      if @assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @assignment }
+      if @assignment.update(score: params["score"])
+        format.html { redirect_to @assignment }
       else
         format.html { render :edit }
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
