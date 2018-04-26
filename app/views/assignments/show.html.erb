@@ -5,3 +5,21 @@
 	<br>
 <%= link_to 'Edit', edit_assignment_path(@assignment) %> |
 <%= link_to 'Back', assignments_path %>
+
+<div class="column">
+  <table class="table">
+    <tbody>
+      <% @assignments.each do |a| %> 
+       <tr>
+          <td>
+            <%= a.name %>
+          </td>
+          <td>
+            <%= a.score %>
+          </td>
+   
+        </tr>
+      <% end %> 
+    </tbody>
+  </table>
+</div>

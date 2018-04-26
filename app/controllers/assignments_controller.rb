@@ -11,6 +11,9 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1.json
   def show
     @assignment = Assignment.find(params[:id])
+    @assignments = Assignment.where(course_id: @assignment.course_id).
+    where(teacher_id: @assignment.teacher_id).
+    where(name: @assignment.name)
   end
 
   # GET /assignments/new
